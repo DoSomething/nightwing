@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Nightwing\Http\Requests;
 use Nightwing\Http\Controllers\Controller;
 
+use Nightwing\Models\Redirect;
+
 class RedirectsController extends Controller
 {
     /**
@@ -16,7 +18,11 @@ class RedirectsController extends Controller
      */
     public function index()
     {
-        return view('redirects.index');
+        $redirects = Redirect::orderBy('created_at', 'desc')->get();
+
+        return view('redirects.index', [
+            'redirects' => $redirects
+        ]);
     }
 
     /**
@@ -37,7 +43,11 @@ class RedirectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $redirect = Redirect::create($request->all());
+        return redirect()->route('redirects.index')->with('flash_message', [
+            'class' => 'messages',
+            'text' => 'Redirect created!',
+        ]);
     }
 
     /**
