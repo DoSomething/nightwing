@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function () {
+    return view('pages.home');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -24,19 +28,6 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    /**
-     * List redirects.
-     */
-    Route::get('/', function() {
-        
-    });
-
-    Route::post('/redirect', function(Request $request) {
-
-    });
-
-    Route::delete('/redirect/{redirect}', function (Redirect $redirect) {
-
-    });
+    Route::resource('redirects', 'RedirectsController');
 
 });
