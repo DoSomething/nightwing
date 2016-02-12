@@ -156,6 +156,7 @@ return [
         Nightwing\Providers\EventServiceProvider::class,
         Nightwing\Providers\RouteServiceProvider::class,
 
+        Nightwing\Providers\FastlyProvider::class,
     ],
 
     /*
