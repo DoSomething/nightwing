@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,5 +23,20 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+
+    /**
+     * List redirects.
+     */
+    Route::get('/', function() {
+        
+    });
+
+    Route::post('/redirect', function(Request $request) {
+
+    });
+
+    Route::delete('/redirect/{redirect}', function (Redirect $redirect) {
+
+    });
+
 });

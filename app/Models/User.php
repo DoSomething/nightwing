@@ -1,6 +1,6 @@
 <?php
 
-namespace Nightwing;
+namespace Nightwing\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
