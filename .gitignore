@@ -3,3 +3,9 @@
 Homestead.yaml
 Homestead.json
 .env
+
+.DS_Store
+.idea
+
+public/assets/vendor
+npm-debug.log
