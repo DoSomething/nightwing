@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Nightwing\Http\Controllers\Auth;
 
-use App\User;
+use Nightwing\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use Nightwing\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

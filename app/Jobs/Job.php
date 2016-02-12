@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace Nightwing\Jobs;
 
 use Illuminate\Bus\Queueable;
 

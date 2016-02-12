@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Nightwing\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
