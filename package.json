@@ -5,6 +5,8 @@
   },
   "dependencies": {
     "laravel-elixir": "^4.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "bootstrap-sass": "^3.0.0",
+    "@dosomething/forge": "^6.6.2",
+    "dosomething-modal": "^0.3.0"
   }
 }
