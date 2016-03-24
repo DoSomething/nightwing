@@ -10,7 +10,7 @@
 
         <link rel="icon" type="image/ico" href="/favicon.ico?v1">
 
-        <link rel="stylesheet" href="{{ asset('assets/vendor/neue/neue.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/forge/forge.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/modal/modal.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/custom-neue.css') }}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -36,7 +36,7 @@
         </div>
     </body>
 
-    <script src="{{ asset('/assets/vendor/neue/neue.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/forge/forge.js') }}"></script>
     <script src="{{ asset('/assets/vendor/modal/modal.js') }}"></script>
 
 </html>
