@@ -9,7 +9,7 @@
 	<tbody>
 		@forelse($redirects as $redirect)
 			<tr class="table-row">
-				<td class="table-cell">{{ $redirect->path }}</a></td>
+				<td class="table-cell"><a href="{!! route('redirects.show', $redirect->id) !!}">{{ $redirect->path }}</a></td>
 				<td class="table-cell">{{ $redirect->target}}</td>
 				<td class="table-cell">{{ $redirect->http_status }}</td>
 			</tr>
