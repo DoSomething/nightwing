@@ -3,7 +3,6 @@
 namespace Nightwing\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Nightwing\Http\Requests;
 use Nightwing\Http\Controllers\Controller;
 
@@ -58,7 +57,8 @@ class RedirectsController extends Controller
      */
     public function show($id)
     {
-        //
+        $redirect = Redirect::find($id);
+        return view('redirects.show', compact('redirect'));
     }
 
     /**

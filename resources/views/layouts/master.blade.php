@@ -10,7 +10,7 @@
 
         <link rel="icon" type="image/ico" href="/favicon.ico?v1">
 
-        <link rel="stylesheet" href="{{ asset('assets/vendor/neue/neue.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/forge/forge.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/modal/modal.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/custom-neue.css') }}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -30,13 +30,29 @@
 
                 @include('layouts.navigation')
 
-                @yield('main_content')
+                <header role="banner" class="header">
+                    <div class="wrapper">
+                        <h1 class="header__title">@yield('title')</h1>
+                        <p class="header__subtitle">@yield('subtitle')</p>
+                    </div>
+                </header>
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="container__block">
+                            <!-- will be used to show any messages -->
+                            @if (Session::has('status'))
+                                <div>{{ Session::get('status') }}</div>
+                            @endif
 
+                            @yield('main_content')
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
 
-    <script src="{{ asset('/assets/vendor/neue/neue.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/forge/forge.js') }}"></script>
     <script src="{{ asset('/assets/vendor/modal/modal.js') }}"></script>
 
 </html>

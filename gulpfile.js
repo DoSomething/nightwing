@@ -12,6 +12,6 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.copy('node_modules/dosomething-neue/dist', 'public/assets/vendor/neue');
+    mix.copy('node_modules/@dosomething/forge/dist', 'public/assets/vendor/forge');
     mix.copy('node_modules/dosomething-modal/dist', 'public/assets/vendor/modal');
 });

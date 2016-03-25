@@ -1,10 +1,11 @@
 @extends('layouts.master')
 
+@section('title', 'Redirects')
+
 @section('main_content')
     <div class ="container -padded">
         <div class="wrapper">
             <div class="container__block -narrow">
-                <h1>All Redirects</h1>
 
                 <div class="container__block">
                     @if (count($redirects) > 0)
