@@ -85,7 +85,10 @@ class RedirectsController extends Controller
         $redirect = Redirect::find($id);
         var_dump($request->all());
         $redirect->update($request->all());
-        return redirect('redirects');
+        return redirect('redirects')->with('flash_message', [
+            'class' => 'messages',
+            'text' => 'Redirect updated!',
+        ]);;
     }
 
     /**
@@ -96,6 +99,11 @@ class RedirectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $redirect = Redirect::findOrFail($id);
+        $redirect->delete();
+        return redirect()->route('redirects.index')->with('flash_message', [
+            'class' => 'messages',
+            'text' => 'Redirect deleted!',
+        ]);
     }
 }

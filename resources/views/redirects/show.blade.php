@@ -18,10 +18,18 @@
             			<p><strong>HTTP Status: </strong>{{ $redirect->http_status }}</p>
 
             		</li>
+				</ul>
+
+				<ul class="form-actions -inline">
 					<li>
 						<a href="{{ route('redirects.edit', $redirect->id) }}" class="button">Edit redirect</a>
 					</li>
-            	</ul>
+					<li>
+						{!! Form::open(['method' => 'DELETE','route' => ['redirects.destroy', $redirect->id]]) !!}
+						{!! Form::submit('Delete', array('class' => 'button delete')) !!}
+						{!! Form::close() !!}
+					</li>
+				</ul>
 
             </div>
         </div>
