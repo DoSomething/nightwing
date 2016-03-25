@@ -83,7 +83,6 @@ class RedirectsController extends Controller
     public function update(Request $request, $id)
     {
         $redirect = Redirect::find($id);
-        var_dump($request->all());
         $redirect->update($request->all());
         return redirect('redirects')->with('flash_message', [
             'class' => 'messages',
