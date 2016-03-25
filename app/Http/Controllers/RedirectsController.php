@@ -84,7 +84,6 @@ class RedirectsController extends Controller
     {
         $redirect = Redirect::find($id);
         var_dump($request->all());
-        // $input = Request::all();
         $redirect->update($request->all());
         return redirect('redirects');
     }
