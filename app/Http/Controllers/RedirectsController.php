@@ -69,7 +69,8 @@ class RedirectsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $redirect = Redirect::find($id);
+        return view('redirects.edit', compact('redirect'));
     }
 
     /**
@@ -81,7 +82,11 @@ class RedirectsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $redirect = Redirect::find($id);
+        var_dump($request->all());
+        // $input = Request::all();
+        $redirect->update($request->all());
+        return redirect('redirects');
     }
 
     /**

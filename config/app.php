@@ -157,6 +157,9 @@ return [
         Nightwing\Providers\RouteServiceProvider::class,
 
         Nightwing\Providers\FastlyProvider::class,
+
+        Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*

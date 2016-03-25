@@ -18,6 +18,9 @@
             			<p><strong>HTTP Status: </strong>{{ $redirect->http_status }}</p>
 
             		</li>
+					<li>
+						<a href="{{ route('redirects.edit', $redirect->id) }}" class="button">Edit redirect</a>
+					</li>
             	</ul>
 
             </div>
