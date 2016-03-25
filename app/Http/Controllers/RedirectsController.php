@@ -69,7 +69,8 @@ class RedirectsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $redirect = Redirect::find($id);
+        return view('redirects.edit', compact('redirect'));
     }
 
     /**
@@ -79,9 +80,13 @@ class RedirectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Redirect $redirect)
     {
-        //
+        $redirect->update($request->all());
+        return redirect('redirects')->with('flash_message', [
+            'class' => 'messages',
+            'text' => 'Redirect updated!',
+        ]);;
     }
 
     /**
@@ -92,6 +97,11 @@ class RedirectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $redirect = Redirect::findOrFail($id);
+        $redirect->delete();
+        return redirect()->route('redirects.index')->with('flash_message', [
+            'class' => 'messages',
+            'text' => 'Redirect deleted!',
+        ]);
     }
 }
