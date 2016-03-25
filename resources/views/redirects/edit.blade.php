@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-item -padded">
-                {!! Form::label('http_status', 'Response type:', array('class' => 'field-label'))!!}
+                {!! Form::label('http_status', 'Response type:', ['class' => 'field-label'])!!}
                 {!! Form::select('http_status', ['301' => '301 Permanent', '302' => '302 Temporary']) !!}
             </div>
 

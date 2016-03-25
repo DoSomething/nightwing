@@ -80,9 +80,8 @@ class RedirectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Redirect $redirect)
     {
-        $redirect = Redirect::find($id);
         $redirect->update($request->all());
         return redirect('redirects')->with('flash_message', [
             'class' => 'messages',
