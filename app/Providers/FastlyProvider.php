@@ -62,6 +62,10 @@ class FastlyProvider extends ServiceProvider
                 $response));
 
         });
+
+        //deleted
+
+        //updated
     }
 
     /**

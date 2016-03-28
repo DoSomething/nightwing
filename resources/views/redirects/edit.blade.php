@@ -17,7 +17,7 @@
 
             <div class="form-item -padded">
                 <label for="path" class="field-label">Path:</label>
-                <input name="path" type="text" class="text-field" value="{{ $redirect->path }}"/>
+                <input name="path" type="text" class="text-field" value="{{ $redirect->path }}" disabled/>
             </div>
 
             <div class="form-item -padded">
