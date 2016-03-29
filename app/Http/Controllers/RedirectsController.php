@@ -42,7 +42,12 @@ class RedirectsController extends Controller
      */
     public function store(Request $request)
     {
-        $redirect = Redirect::create($request->all());
+        $request = $request->all();
+        if(substr($request['path'], 0, 1) !== '/')
+        {
+            $request['path'] = '/' .  $request['path'];
+        }
+        $redirect = Redirect::create($request);
         return redirect()->route('redirects.index')->with('flash_message', [
             'class' => 'messages',
             'text' => 'Redirect created!',

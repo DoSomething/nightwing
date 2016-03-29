@@ -79,7 +79,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_CUSTOMREQUEST => "DELETE",
                 CURLOPT_HTTPHEADER => array(sprintf('Fastly-Key: %s', $fastly_key)),
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirects . '/item' . $redirect->path,
+                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirects . '/item/' . urlencode($redirect->path),
             ));
             $response = curl_exec($ch);
 
@@ -92,7 +92,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_CUSTOMREQUEST => "DELETE",
                 CURLOPT_HTTPHEADER => array(sprintf('Fastly-Key: %s', $fastly_key)),
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirect_types . '/item' . $redirect->path,
+                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirect_types . '/item/' . urlencode($redirect->path),
             ));
             $response = curl_exec($ch);
 
@@ -116,7 +116,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_CUSTOMREQUEST => "PUT",
                 CURLOPT_HTTPHEADER => array(sprintf('Fastly-Key: %s', $fastly_key)),
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirects . '/item' . $redirect->path,
+                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirects . '/item/' . urlencode($redirect->path),
                 CURLOPT_POSTFIELDS => array(
                     'item_value' => $redirect->target,
                 ),
@@ -132,7 +132,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_CUSTOMREQUEST => "PUT",
                 CURLOPT_HTTPHEADER => array(sprintf('Fastly-Key: %s', $fastly_key)),
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirect_types . '/item' . $redirect->path,
+                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirect_types . '/item/' . urlencode($redirect->path),
                 CURLOPT_POSTFIELDS => array(
                     'item_value' => $redirect->http_status,
                 ),
