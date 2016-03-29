@@ -10,28 +10,35 @@
 </div>
 <div class='container__block'>
     <div class='wrapper'>
-        {!! Form::model($redirect, ['method' => 'PATCH', 'route' => ['redirects.update', $redirect->id]]) !!}
+        <form method="POST" action="{{ route('redirects.update', $redirect->id) }}">
+            {{ method_field('PATCH') }}
 
-            <div class="form-item">
-                {!! Form::label('path', 'Path: ', array('class' => 'field-label')) !!}
-                {!! Form::text('path', NULL, array('class' => 'text-field')) !!}
-            </div>
+            {{ csrf_field() }}
 
-            <div class="form-item">
-                {!! Form::label('target', 'Target: ', array('class' => 'field-label')) !!}
-                {!! Form::text('target', NULL, array('class' => 'text-field')) !!}
+            <div class="form-item -padded">
+                <label for="path" class="field-label">Path:</label>
+                <input name="path" type="text" class="text-field" value="{{ $redirect->path }}" disabled/>
             </div>
 
             <div class="form-item -padded">
-                {!! Form::label('http_status', 'Response type:', ['class' => 'field-label'])!!}
-                {!! Form::select('http_status', ['301' => '301 Permanent', '302' => '302 Temporary']) !!}
+                <label class="field-label">Target:</label>
+                <input name="target" type="text" class="text-field" value="{{ $redirect->target }}"/>
             </div>
 
-            <div class="form-item">
-                {!! Form::submit('Update Redirect',  ['class' => 'button']) !!}
+            <div class="form-item -padded">
+                <label for="http_status" class="field-label">Response type:</label>
+                <select name="http_status">
+                    <option value="301" {{ $redirect->http_status == '301' ? 'selected' : '' }}>301 Permanent</option>
+                    <option value="302" {{ $redirect->http_status == '302' ? 'selected' : '' }}>302 Temporary</option>
+                </select>
             </div>
 
-        {!! Form::close() !!}
+             <div class="form-item">
+                <button type="submit" class="button">
+                    Update redirect
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 

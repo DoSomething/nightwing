@@ -62,6 +62,89 @@ class FastlyProvider extends ServiceProvider
                 $response));
 
         });
+
+        //deleted
+         Redirect::deleted(function($redirect) {
+            Log::info(sprintf('Deleting Fastly redirect: %s => %s (%d)',
+                $redirect->path, $redirect->target, $redirect->http_status));
+
+
+            // Here's the hacky part....
+            $fastly_key = '30342701a122f58e935c9fe1024b8bc8';
+            $fastly_table_redirects = 'isbuug15ZlBduv6XWk0VU';
+            $fastly_table_redirect_types = '5v35JNHgaK2qFG5fNacSPO';
+
+            // Step one: Remove from 'redirects' table.
+            $ch = curl_init();
+            curl_setopt_array($ch, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_CUSTOMREQUEST => "DELETE",
+                CURLOPT_HTTPHEADER => array(sprintf('Fastly-Key: %s', $fastly_key)),
+                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirects . '/item/' . $redirect->path,
+            ));
+            $response = curl_exec($ch);
+
+            Log::info(sprintf('Response: call 1: %s',
+                $response));
+
+            // Step two: Remove from 'redirect_types' table.
+            $ch = curl_init();
+            curl_setopt_array($ch, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_CUSTOMREQUEST => "DELETE",
+                CURLOPT_HTTPHEADER => array(sprintf('Fastly-Key: %s', $fastly_key)),
+                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirect_types . '/item/' . $redirect->path,
+            ));
+            $response = curl_exec($ch);
+
+            Log::info(sprintf('Response: call 2: %s',
+                $response));
+
+        });
+
+        //updated
+         Redirect::updated(function($redirect) {
+            Log::info(sprintf('Updating existing Fastly redirect: %s => %s (%d)',
+                $redirect->path, $redirect->target, $redirect->http_status));
+
+            // Here's the hacky part....
+            $fastly_key = '30342701a122f58e935c9fe1024b8bc8';
+            $fastly_table_redirects = 'isbuug15ZlBduv6XWk0VU';
+            $fastly_table_redirect_types = '5v35JNHgaK2qFG5fNacSPO';
+
+            // Step one: Update 'redirects' table.
+            $ch = curl_init();
+            curl_setopt_array($ch, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_CUSTOMREQUEST => "PUT",
+                CURLOPT_HTTPHEADER => array(sprintf('Fastly-Key: %s', $fastly_key)),
+                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirects . '/item/' . $redirect->path,
+                CURLOPT_POSTFIELDS => array(
+                    'item_value' => $redirect->target,
+                ),
+            ));
+            $response = curl_exec($ch);
+
+            Log::info(sprintf('Response: call 1: %s',
+                $response));
+
+            // Step two: Update 'redirect_types' table.
+            $ch = curl_init();
+            curl_setopt_array($ch, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_CUSTOMREQUEST => "PUT",
+                CURLOPT_HTTPHEADER => array(sprintf('Fastly-Key: %s', $fastly_key)),
+                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirect_types . '/item/' . $redirect->path,
+                CURLOPT_POSTFIELDS => array(
+                    'item_value' => $redirect->http_status,
+                ),
+            ));
+            $response = curl_exec($ch);
+
+            Log::info(sprintf('Response: call 2: %s',
+                $response));
+
+        });
     }
 
     /**

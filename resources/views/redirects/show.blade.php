@@ -24,11 +24,14 @@
 					<li>
 						<a href="{{ route('redirects.edit', $redirect->id) }}" class="button">Edit redirect</a>
 					</li>
-					<li>
-						{!! Form::open(['method' => 'DELETE','route' => ['redirects.destroy', $redirect->id]]) !!}
-						{!! Form::submit('Delete', array('class' => 'button delete')) !!}
-						{!! Form::close() !!}
-					</li>
+					<li>				
+                        <form method="POST" action="{{ route('redirects.destroy', $redirect->id) }}">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+
+                            <input type="submit" class="button -danger" value="Delete" />
+                        </form>
+                    </li>
 				</ul>
 
             </div>
