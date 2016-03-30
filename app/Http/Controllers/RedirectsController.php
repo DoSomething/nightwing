@@ -48,8 +48,7 @@ class RedirectsController extends Controller
         ]);
 
         $request = $request->all();
-        if(substr($request['path'], 0, 1) !== '/')
-        {
+        if(substr($request['path'], 0, 1) !== '/'){
             $request['path'] = '/' .  $request['path'];
         }
         $redirect = Redirect::create($request);
