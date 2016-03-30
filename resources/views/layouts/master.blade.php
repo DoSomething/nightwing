@@ -5,6 +5,7 @@
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Redirect Something</title>
 
@@ -54,5 +55,7 @@
 
     <script src="{{ asset('/assets/vendor/forge/forge.js') }}"></script>
     <script src="{{ asset('/assets/vendor/modal/modal.js') }}"></script>
+    <script src="{{ asset('/dist/main.js') }}"></script>
+
 
 </html>

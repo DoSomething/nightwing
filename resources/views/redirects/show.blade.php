@@ -25,12 +25,7 @@
 						<a href="{{ route('redirects.edit', $redirect->id) }}" class="button">Edit redirect</a>
 					</li>
 					<li>				
-                        <form method="POST" action="{{ route('redirects.destroy', $redirect->id) }}">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-
-                            <input type="submit" class="button -danger" value="Delete" />
-                        </form>
+                        <a class="button -danger" href="#" data-action="submit" data-method="delete" data-confirm="Delete this redirect?" data-path="{{ route('redirects.destroy', $redirect->id) }}">Destroy</a>
                     </li>
 				</ul>
 
