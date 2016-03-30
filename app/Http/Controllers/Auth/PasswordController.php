@@ -2,8 +2,8 @@
 
 namespace Nightwing\Http\Controllers\Auth;
 
-use Nightwing\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Nightwing\Http\Controllers\Controller;
 
 class PasswordController extends Controller
 {

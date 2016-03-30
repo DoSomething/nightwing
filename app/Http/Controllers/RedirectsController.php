@@ -3,9 +3,6 @@
 namespace Nightwing\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Nightwing\Http\Requests;
-use Nightwing\Http\Controllers\Controller;
-
 use Nightwing\Models\Redirect;
 
 class RedirectsController extends Controller
@@ -20,7 +17,7 @@ class RedirectsController extends Controller
         $redirects = Redirect::orderBy('created_at', 'desc')->get();
 
         return view('redirects.index', [
-            'redirects' => $redirects
+            'redirects' => $redirects,
         ]);
     }
 
@@ -37,56 +34,63 @@ class RedirectsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'path' => 'required',
+            'path'   => 'required',
             'target' => 'required',
         ]);
 
         $request = $request->all();
-        if(substr($request['path'], 0, 1) !== '/'){
-            $request['path'] = '/' .  $request['path'];
+        if (substr($request['path'], 0, 1) !== '/') {
+            $request['path'] = '/'.$request['path'];
         }
         $redirect = Redirect::create($request);
+
         return redirect()->route('redirects.index')->with('flash_message', [
             'class' => 'messages',
-            'text' => 'Redirect created!',
+            'text'  => 'Redirect created!',
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $redirect = Redirect::find($id);
+
         return view('redirects.show', compact('redirect'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $redirect = Redirect::find($id);
+
         return view('redirects.edit', compact('redirect'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Redirect $redirect)
@@ -95,16 +99,18 @@ class RedirectsController extends Controller
             'target' => 'required',
         ]);
         $redirect->update($request->all());
+
         return redirect('redirects')->with('flash_message', [
             'class' => 'messages',
-            'text' => 'Redirect updated!',
-        ]);;
+            'text'  => 'Redirect updated!',
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -113,8 +119,8 @@ class RedirectsController extends Controller
         $status = $redirect->delete();
 
         return [
-            'success' => $status,
-            'redirect' => route('redirects.index')
+            'success'  => $status,
+            'redirect' => route('redirects.index'),
         ];
     }
 }
