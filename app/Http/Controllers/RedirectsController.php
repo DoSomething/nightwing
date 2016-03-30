@@ -42,7 +42,16 @@ class RedirectsController extends Controller
      */
     public function store(Request $request)
     {
-        $redirect = Redirect::create($request->all());
+        $this->validate($request, [
+            'path' => 'required',
+            'target' => 'required',
+        ]);
+
+        $request = $request->all();
+        if(substr($request['path'], 0, 1) !== '/'){
+            $request['path'] = '/' .  $request['path'];
+        }
+        $redirect = Redirect::create($request);
         return redirect()->route('redirects.index')->with('flash_message', [
             'class' => 'messages',
             'text' => 'Redirect created!',
@@ -82,6 +91,9 @@ class RedirectsController extends Controller
      */
     public function update(Request $request, Redirect $redirect)
     {
+        $this->validate($request, [
+            'target' => 'required',
+        ]);
         $redirect->update($request->all());
         return redirect('redirects')->with('flash_message', [
             'class' => 'messages',
@@ -98,10 +110,11 @@ class RedirectsController extends Controller
     public function destroy($id)
     {
         $redirect = Redirect::findOrFail($id);
-        $redirect->delete();
-        return redirect()->route('redirects.index')->with('flash_message', [
-            'class' => 'messages',
-            'text' => 'Redirect deleted!',
-        ]);
+        $status = $redirect->delete();
+
+        return [
+            'success' => $status,
+            'redirect' => route('redirects.index')
+        ];
     }
 }
