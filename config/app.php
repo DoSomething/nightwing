@@ -158,7 +158,6 @@ return [
 
         Nightwing\Providers\FastlyProvider::class,
 
-
     ],
 
     /*

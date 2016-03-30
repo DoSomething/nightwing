@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
 use Nightwing\Models\Redirect;
 
 class RedirectsTableSeeder extends Seeder

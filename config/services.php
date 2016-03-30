@@ -39,6 +39,6 @@ return [
         'key'                   => env('FASTLY_KEY'),
         'table_redirects'       => env('FASTLY_TABLE_REDIRECTS'),
         'table_redirect_types'  => env('FASTLY_TABLE_REDIRECT_TYPES'),
-    ]
+    ],
 
 ];
