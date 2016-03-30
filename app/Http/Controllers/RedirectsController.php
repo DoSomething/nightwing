@@ -3,9 +3,6 @@
 namespace Nightwing\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Nightwing\Http\Requests;
-use Nightwing\Http\Controllers\Controller;
-
 use Nightwing\Models\Redirect;
 
 class RedirectsController extends Controller
@@ -20,7 +17,7 @@ class RedirectsController extends Controller
         $redirects = Redirect::orderBy('created_at', 'desc')->get();
 
         return view('redirects.index', [
-            'redirects' => $redirects
+            'redirects' => $redirects,
         ]);
     }
 
@@ -48,10 +45,11 @@ class RedirectsController extends Controller
         ]);
 
         $request = $request->all();
-        if(substr($request['path'], 0, 1) !== '/'){
+        if (substr($request['path'], 0, 1) !== '/') {
             $request['path'] = '/' .  $request['path'];
         }
         $redirect = Redirect::create($request);
+
         return redirect()->route('redirects.index')->with('flash_message', [
             'class' => 'messages',
             'text' => 'Redirect created!',
@@ -67,6 +65,7 @@ class RedirectsController extends Controller
     public function show($id)
     {
         $redirect = Redirect::find($id);
+
         return view('redirects.show', compact('redirect'));
     }
 
@@ -79,6 +78,7 @@ class RedirectsController extends Controller
     public function edit($id)
     {
         $redirect = Redirect::find($id);
+
         return view('redirects.edit', compact('redirect'));
     }
 
@@ -95,10 +95,11 @@ class RedirectsController extends Controller
             'target' => 'required',
         ]);
         $redirect->update($request->all());
+
         return redirect('redirects')->with('flash_message', [
             'class' => 'messages',
             'text' => 'Redirect updated!',
-        ]);;
+        ]);
     }
 
     /**
@@ -114,7 +115,7 @@ class RedirectsController extends Controller
 
         return [
             'success' => $status,
-            'redirect' => route('redirects.index')
+            'redirect' => route('redirects.index'),
         ];
     }
 }
