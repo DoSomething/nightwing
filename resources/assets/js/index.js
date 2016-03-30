@@ -14,8 +14,6 @@ actions.on('submit', function (element, parents) {
   var method = parents.getAttribute('data-method') || 'post';
   var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-  console.log(token);
-
   return fetch(parents.getAttribute('data-path'), {
   	method: method,
   	credentials: 'same-origin', 
