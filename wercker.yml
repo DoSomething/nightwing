@@ -1,0 +1,33 @@
+box: blisteringherb/scholarship@0.0.8
+build:
+    # The steps that will be executed on build
+    steps:
+      - script:
+          name: Update Composer
+          code: sudo composer self-update
+      - leipert/composer-install@0.9.1
+      - wercker/bundle-install@1.1.1
+      - script:
+          name: npm install
+          code: |-
+            mkdir -p $WERCKER_CACHE_DIR/wercker/npm
+            npm config set cache $WERCKER_CACHE_DIR/wercker/npm
+            sudo npm install
+      - script:
+          name: build assets
+          code: gulp
+deploy:
+  steps:
+    - bundle-install
+    - script:
+        name: write private key env var
+        code: |-
+          export CAP_PRIVATE_KEY=`mktemp`
+          echo -e $WERCKER_APP_KEY_PRIVATE > $CAP_PRIVATE_KEY
+    - cap
+  after-steps:
+      - iansmith9876/pretty-slack-notify:
+          team: dosomething
+          token: $SLACK_TOKEN
+          channel: $SLACK_ROOM
+          username: george
