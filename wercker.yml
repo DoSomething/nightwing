@@ -2,7 +2,6 @@ box: dylanlindgren/docker-laravel-composer
 build:
     # The steps that will be executed on build
     steps:
-      - wercker/add-to-known_hosts@2.0.1
       - script:
           name: Update Composer
           code: sudo composer self-update
