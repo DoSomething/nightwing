@@ -43,6 +43,6 @@ return [
 
     'northstar' => [
         'url' => env('NORTHSTAR_URL'), // the environment you want to connect to
-        'api_key' => env('NORTHSTAR_API_KEY')         // your app's API key
+        'api_key' => env('NORTHSTAR_API_KEY'),         // your app's API key
     ]
 ];
