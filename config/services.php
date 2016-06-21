@@ -41,4 +41,8 @@ return [
         'table_redirect_types'  => env('FASTLY_TABLE_REDIRECT_TYPES'),
     ],
 
+    'northstar' => [
+        'url' => env('NORTHSTAR_URL'), // the environment you want to connect to
+        'api_key' => env('NORTHSTAR_API_KEY')         // your app's API key
+    ]
 ];

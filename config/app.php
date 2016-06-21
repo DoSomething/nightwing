@@ -157,7 +157,7 @@ return [
         Nightwing\Providers\RouteServiceProvider::class,
 
         Nightwing\Providers\FastlyProvider::class,
-
+        DoSomething\Northstar\NorthstarServiceProvider::class,
     ],
 
     /*
@@ -207,7 +207,7 @@ return [
         /*
          * Third-Party Aliases...
          */
-
+        'Northstar' => DoSomething\Northstar\Facades\Northstar::class,
     ],
 
 ];
