@@ -92,7 +92,6 @@ class FastlyProvider extends ServiceProvider
 
              Log::info(sprintf('Response: call 2: %s',
                 $response));
-
          });
 
         //updated
@@ -135,7 +134,6 @@ class FastlyProvider extends ServiceProvider
 
              Log::info(sprintf('Response: call 2: %s',
                 $response));
-
          });
     }
 
