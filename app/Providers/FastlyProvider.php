@@ -22,6 +22,7 @@ class FastlyProvider extends ServiceProvider
             $fastly_key = config('services.fastly.key');
             $fastly_table_redirects = config('services.fastly.table_redirects');
             $fastly_table_redirect_types = config('services.fastly.table_redirect_types');
+            $fastly_service_key = config('services.fastly.service_key');
 
             // Step one: Add to 'redirects' table.
             $ch = curl_init();
@@ -29,7 +30,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_POST => 1,
                 CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirects . '/item',
+                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/dictionary/' . $fastly_table_redirects . '/item',
                 CURLOPT_POSTFIELDS => [
                     'item_key' => $redirect->path,
                     'item_value' => $redirect->target,
@@ -46,7 +47,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_POST => 1,
                 CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirect_types . '/item',
+                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/dictionary/' . $fastly_table_redirect_types . '/item',
                 CURLOPT_POSTFIELDS => [
                     'item_key' => $redirect->path,
                     'item_value' => $redirect->http_status,
@@ -66,6 +67,7 @@ class FastlyProvider extends ServiceProvider
              $fastly_key = config('services.fastly.key');
              $fastly_table_redirects = config('services.fastly.table_redirects');
              $fastly_table_redirect_types = config('services.fastly.table_redirect_types');
+             $fastly_service_key = config('services.fastly.service_key');
 
             // Step one: Remove from 'redirects' table.
             $ch = curl_init();
@@ -73,7 +75,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_CUSTOMREQUEST => 'DELETE',
                 CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirects . '/item/' . urlencode($redirect->path),
+                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/dictionary/' . $fastly_table_redirects . '/item/' . urlencode($redirect->path),
             ]);
              $response = curl_exec($ch);
 
@@ -86,7 +88,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_CUSTOMREQUEST => 'DELETE',
                 CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirect_types . '/item/' . urlencode($redirect->path),
+                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/dictionary/' . $fastly_table_redirect_types . '/item/' . urlencode($redirect->path),
             ]);
              $response = curl_exec($ch);
 
@@ -102,6 +104,7 @@ class FastlyProvider extends ServiceProvider
              $fastly_key = config('services.fastly.key');
              $fastly_table_redirects = config('services.fastly.table_redirects');
              $fastly_table_redirect_types = config('services.fastly.table_redirect_types');
+             $fastly_service_key = config('services.fastly.service_key');
 
             // Step one: Update 'redirects' table.
             $ch = curl_init();
@@ -109,7 +112,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_CUSTOMREQUEST => 'PUT',
                 CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirects . '/item/' . urlencode($redirect->path),
+                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/dictionary/' . $fastly_table_redirects . '/item/' . urlencode($redirect->path),
                 CURLOPT_POSTFIELDS => [
                     'item_value' => $redirect->target,
                 ],
@@ -125,7 +128,7 @@ class FastlyProvider extends ServiceProvider
                 CURLOPT_RETURNTRANSFER => 1,
                 CURLOPT_CUSTOMREQUEST => 'PUT',
                 CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
-                CURLOPT_URL => 'https://api.fastly.com/service/3uoN6UPm3Byl5RAkYuhTTk/dictionary/' . $fastly_table_redirect_types . '/item/' . urlencode($redirect->path),
+                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/dictionary/' . $fastly_table_redirect_types . '/item/' . urlencode($redirect->path),
                 CURLOPT_POSTFIELDS => [
                     'item_value' => $redirect->http_status,
                 ],
