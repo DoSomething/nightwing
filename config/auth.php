@@ -66,8 +66,8 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-            'model' => Nightwing\User::class,
+            'driver' => 'northstar',
+            'model' => Nightwing\Models\User::class,
         ],
 
         // 'users' => [

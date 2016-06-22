@@ -2,7 +2,7 @@
 
 namespace Nightwing\Http\Controllers\Auth;
 
-use Nightwing\User;
+use Nightwing\Models\User;
 use Validator;
 use Nightwing\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -28,7 +28,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/redirects';
 
     /**
      * Create a new authentication controller instance.

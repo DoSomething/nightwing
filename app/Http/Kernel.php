@@ -44,6 +44,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'admin' => \Nightwing\Http\Middleware\Admin::class,
         'auth' => \Nightwing\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Nightwing\Http\Middleware\RedirectIfAuthenticated::class,
