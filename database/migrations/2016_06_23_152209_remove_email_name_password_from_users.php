@@ -12,7 +12,7 @@ class RemoveEmailNamePasswordFromUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function(Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('name');
             $table->dropColumn('email');
             $table->dropColumn('password');
@@ -26,7 +26,7 @@ class RemoveEmailNamePasswordFromUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function(Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password', 60);
