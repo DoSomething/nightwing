@@ -25,6 +25,7 @@ A redirect management application in Laravel.
   `php artisan migrate && php artisan db:seed`
 8. Front end assets
     `npm install`
+    `gulp`
 8. One you finish the rest of the setup below, you can see the whole pretty site at `nightwing.dev:8000`
 
 
