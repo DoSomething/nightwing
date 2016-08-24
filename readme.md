@@ -18,7 +18,7 @@ A redirect management application in Laravel.
     - Port: `33060`
     - Hit `connect`
     - In the `choose database` dropdown select `add database`
-    - Name the database `scholarship_app` with UTF-8 encoding.
+    - Name the database `nightwing` with UTF-8 encoding.
 6. Within the directory for the project in the Vagrant VM ([instructions here](https://github.com/DoSomething/ds-homestead#ssh-into-virtual-machine)), run:
     `composer install`
 7. Run migrations and see the database
