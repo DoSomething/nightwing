@@ -19,30 +19,13 @@ A redirect management application in Laravel.
     - Hit `connect`
     - In the `choose database` dropdown select `add database`
     - Name the database `scholarship_app` with UTF-8 encoding.
-6. One you finish the rest of the setup below, you can see the whole pretty site at `nightwing.dev:8000`
-
-
-### Composer
-
-Before doing anything else, you need to install all the project's dependencies with `composer`. 
-
-Within the directory for the project in the Vagrant VM ([instructions here](https://github.com/DoSomething/ds-homestead#ssh-into-virtual-machine)), run:
-
-    $ composer install
-
-### Back-end
-
-To run the migrations to setup your database and then immediately seed it, run (also from the project directory in vagrant):
-
-    $ php artisan migrate && php artisan db:seed
-
-### Front-end
-
-The following commands need to be run from within the root directory for the project on the virtual machine (get comfy in there).
-
-To install the required NPM modules, run:
-
-    $ npm install
+6. Within the directory for the project in the Vagrant VM ([instructions here](https://github.com/DoSomething/ds-homestead#ssh-into-virtual-machine)), run:
+    `composer install`
+7. Run migrations and see the database
+  `php artisan migrate && php artisan db:seed`
+8. Front end assets
+    `npm install`
+8. One you finish the rest of the setup below, you can see the whole pretty site at `nightwing.dev:8000`
 
 
 ## Official Documentation
