@@ -15,6 +15,7 @@ class FastlyProvider extends ServiceProvider
      */
     public function boot()
     {
+        //created
         Redirect::created(function ($redirect) {
             Log::info(sprintf('Creating new Fastly redirect: %s => %s (%d)',
                 $redirect->path, $redirect->target, $redirect->http_status));
@@ -94,6 +95,20 @@ class FastlyProvider extends ServiceProvider
 
              Log::info(sprintf('Response: call 2: %s',
                 $response));
+
+            // Step three: Purge this service so the deleted redirect stops working immediately
+             $ch = curl_init();
+             curl_setopt_array($ch, [
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
+                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/purge_all',
+             ]);
+             $response = curl_exec($ch);
+
+             Log::info(sprintf('Response: call 3 (purge): %s',
+                $response));
+
          });
 
         //updated
@@ -137,6 +152,22 @@ class FastlyProvider extends ServiceProvider
 
              Log::info(sprintf('Response: call 2: %s',
                 $response));
+
+            // Step three: Purge this service so the updated redirect target is immediately working
+             $ch = curl_init();
+             curl_setopt_array($ch, [
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
+                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/purge_all',
+            ]);
+             $response = curl_exec($ch);
+
+             Log::info(sprintf('Response: call 3 (purge): %s',
+                $response));
+
+
+
          });
     }
 
