@@ -69,6 +69,7 @@ class FastlyProvider extends ServiceProvider
              $fastly_table_redirects = config('services.fastly.table_redirects');
              $fastly_table_redirect_types = config('services.fastly.table_redirect_types');
              $fastly_service_key = config('services.fastly.service_key');
+             $fastly_domain = config('services.fastly.domain');
 
             // Step one: Remove from 'redirects' table.
             $ch = curl_init();
@@ -96,13 +97,12 @@ class FastlyProvider extends ServiceProvider
              Log::info(sprintf('Response: call 2: %s',
                 $response));
 
-            // Step three: Purge this service so the deleted redirect stops working immediately
+            // Step three: Purge the url of the deleted redirect so the deleted redirect stops working immediately
              $ch = curl_init();
              curl_setopt_array($ch, [
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
-                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/purge_all',
+                CURLOPT_CUSTOMREQUEST => 'PURGE',
+                CURLOPT_URL => $fastly_domain . '/' . urlencode($redirect->path),
              ]);
              $response = curl_exec($ch);
 
@@ -120,6 +120,7 @@ class FastlyProvider extends ServiceProvider
              $fastly_table_redirects = config('services.fastly.table_redirects');
              $fastly_table_redirect_types = config('services.fastly.table_redirect_types');
              $fastly_service_key = config('services.fastly.service_key');
+             $fastly_domain = config('services.fastly.domain');
 
             // Step one: Update 'redirects' table.
             $ch = curl_init();
@@ -153,14 +154,13 @@ class FastlyProvider extends ServiceProvider
              Log::info(sprintf('Response: call 2: %s',
                 $response));
 
-            // Step three: Purge this service so the updated redirect target is immediately working
+            // Step three: Purge the url of the updated redirect so it directs to the new target immediately
              $ch = curl_init();
              curl_setopt_array($ch, [
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_HTTPHEADER => [sprintf('Fastly-Key: %s', $fastly_key)],
-                CURLOPT_URL => 'https://api.fastly.com/service/' . $fastly_service_key . '/purge_all',
-            ]);
+                CURLOPT_CUSTOMREQUEST => 'PURGE',
+                CURLOPT_URL => $fastly_domain . '/' . urlencode($redirect->path),
+             ]);
              $response = curl_exec($ch);
 
              Log::info(sprintf('Response: call 3 (purge): %s',
