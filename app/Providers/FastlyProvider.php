@@ -69,7 +69,6 @@ class FastlyProvider extends ServiceProvider
              $fastly_table_redirects = config('services.fastly.table_redirects');
              $fastly_table_redirect_types = config('services.fastly.table_redirect_types');
              $fastly_service_key = config('services.fastly.service_key');
-             $fastly_domain = config('services.fastly.domain');
 
             // Step one: Remove from 'redirects' table.
             $ch = curl_init();
@@ -98,17 +97,7 @@ class FastlyProvider extends ServiceProvider
                 $response));
 
             // Step three: Purge the url of the deleted redirect so the deleted redirect stops working immediately
-             $ch = curl_init();
-             curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_CUSTOMREQUEST => 'PURGE',
-                CURLOPT_URL => $fastly_domain . '/' . urlencode($redirect->path),
-             ]);
-             $response = curl_exec($ch);
-
-             Log::info(sprintf('Response: call 3 (purge): %s',
-                $response));
-
+             $this->fastlyPurge($redirect->path);
          });
 
         //updated
@@ -120,7 +109,6 @@ class FastlyProvider extends ServiceProvider
              $fastly_table_redirects = config('services.fastly.table_redirects');
              $fastly_table_redirect_types = config('services.fastly.table_redirect_types');
              $fastly_service_key = config('services.fastly.service_key');
-             $fastly_domain = config('services.fastly.domain');
 
             // Step one: Update 'redirects' table.
             $ch = curl_init();
@@ -155,19 +143,7 @@ class FastlyProvider extends ServiceProvider
                 $response));
 
             // Step three: Purge the url of the updated redirect so it directs to the new target immediately
-             $ch = curl_init();
-             curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_CUSTOMREQUEST => 'PURGE',
-                CURLOPT_URL => $fastly_domain . '/' . urlencode($redirect->path),
-             ]);
-             $response = curl_exec($ch);
-
-             Log::info(sprintf('Response: call 3 (purge): %s',
-                $response));
-
-
-
+             $this->fastlyPurge($redirect->path);
          });
     }
 
@@ -179,5 +155,21 @@ class FastlyProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    public function fastlyPurge($path)
+    {
+        $fastly_domain = config('services.fastly.domain');
+
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_CUSTOMREQUEST => 'PURGE',
+            CURLOPT_URL => $fastly_domain . '/' . urlencode($path),
+        ]);
+        $response = curl_exec($ch);
+
+        Log::info(sprintf('Response: purge: %s',
+            $response));
     }
 }
