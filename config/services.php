@@ -40,6 +40,7 @@ return [
         'table_redirects'       => env('FASTLY_TABLE_REDIRECTS'),
         'table_redirect_types'  => env('FASTLY_TABLE_REDIRECT_TYPES'),
         'service_key'           => env('FASTLY_SERVICE_KEY'),
+        'domain'                => env('FASTLY_SERVICE_DOMAIN'),
     ],
 
     'northstar' => [

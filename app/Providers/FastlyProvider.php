@@ -15,6 +15,7 @@ class FastlyProvider extends ServiceProvider
      */
     public function boot()
     {
+        //created
         Redirect::created(function ($redirect) {
             Log::info(sprintf('Creating new Fastly redirect: %s => %s (%d)',
                 $redirect->path, $redirect->target, $redirect->http_status));
@@ -94,6 +95,9 @@ class FastlyProvider extends ServiceProvider
 
              Log::info(sprintf('Response: call 2: %s',
                 $response));
+
+            // Step three: Purge the url of the deleted redirect so the deleted redirect stops working immediately
+             $this->fastlyPurge($redirect->path);
          });
 
         //updated
@@ -137,6 +141,9 @@ class FastlyProvider extends ServiceProvider
 
              Log::info(sprintf('Response: call 2: %s',
                 $response));
+
+            // Step three: Purge the url of the updated redirect so it directs to the new target immediately
+             $this->fastlyPurge($redirect->path);
          });
     }
 
@@ -148,5 +155,21 @@ class FastlyProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    public function fastlyPurge($path)
+    {
+        $fastly_domain = config('services.fastly.domain');
+
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_CUSTOMREQUEST => 'PURGE',
+            CURLOPT_URL => $fastly_domain . '/' . urlencode($path),
+        ]);
+        $response = curl_exec($ch);
+
+        Log::info(sprintf('Response: purge: %s',
+            $response));
     }
 }
