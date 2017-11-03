@@ -149,15 +149,19 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * Third Party Service Providers...
+         */
+        DoSomething\Gateway\Laravel\GatewayServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         Nightwing\Providers\AppServiceProvider::class,
         Nightwing\Providers\AuthServiceProvider::class,
         Nightwing\Providers\EventServiceProvider::class,
         Nightwing\Providers\RouteServiceProvider::class,
-
         Nightwing\Providers\FastlyProvider::class,
-        DoSomething\Northstar\NorthstarServiceProvider::class,
+
     ],
 
     /*

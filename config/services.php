@@ -43,8 +43,15 @@ return [
         'domain'                => env('FASTLY_SERVICE_DOMAIN'),
     ],
 
+
     'northstar' => [
-        'url' => env('NORTHSTAR_URL'), // the environment you want to connect to
-        'api_key' => env('NORTHSTAR_API_KEY'),         // your app's API key
+        'grant' => 'authorization_code',
+        'url' => env('NORTHSTAR_URL'),
+        'authorization_code' => [
+            'client_id' => env('NORTHSTAR_AUTH_ID'),
+            'client_secret' => env('NORTHSTAR_AUTH_SECRET'),
+            'scope' => ['user', 'role:staff', 'role:admin'],
+            'redirect_uri' => '/login',
+        ],
     ],
 ];

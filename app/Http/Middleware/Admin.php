@@ -17,10 +17,13 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (! Auth::user() || ! Auth::user()->admin) {
-            return redirect('/login');
+        if (auth()->user()->role === 'admin') {
+            return $next($request);
         }
 
-        return $next($request);
+        return redirect('/')->with('flash_message', [
+            'class' => 'messages -error',
+            'text' =>'You must be an admin to do that.'
+        ]);
     }
 }
