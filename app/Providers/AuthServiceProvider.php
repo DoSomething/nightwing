@@ -2,7 +2,6 @@
 
 namespace Nightwing\Providers;
 
-use Auth;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -26,11 +25,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
-
-        Auth::provider('northstar', function ($app, array $config) {
-            return new \DoSomething\Northstar\NorthstarUserProvider(
-                $app['northstar'], $app['hash'], $config['model']
-            );
-        });
     }
 }
